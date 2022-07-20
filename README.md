@@ -1,24 +1,9 @@
-# admin
+# Admin后台管理项目
 
-## Project setup
-```
-npm install
-```
+## 使用方法
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
++ 使用npm i 命令下载node_modules工具
++ 使用npm i axios -S 安装axios 
++ 使用vue add element
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## 暂时只完成了login登录的鉴权，以及获取首页的列表
