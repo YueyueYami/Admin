@@ -1,13 +1,13 @@
 import axios from 'axios'
 import dev from '../utils/dev'
 import { Message } from 'element-ui'
+// import router from '@/router/index'
 const https = axios.create({
     baseURL: dev.prod.baseURL,
     timeout: 5000
 })
 https.interceptors.request.use(
     (config) => {
-        console.log(config);
         if (config.url != '/') {
             const token = window.sessionStorage.getItem('token')
             config.headers.Authorization = token
@@ -19,8 +19,11 @@ https.interceptors.request.use(
 )
 https.interceptors.response.use(
     (response) => {
+        if (response.data.meta.msg == '无效token') {
+            window.sessionStorage.removeItem('token')
+            window.location.href = '/'
+        }
         const status = [200, 201, 204]
-        // console.log(response.data)
         if (status.includes(response.data.meta.status)) {
             Message({
                 message: response.data.meta.msg,
@@ -37,7 +40,6 @@ https.interceptors.response.use(
         }
         return response
     }, (err) => {
-        console.log(err)
         alert(err)
     }
 )

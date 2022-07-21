@@ -15,7 +15,7 @@
             }
 
             .el-aside {
-                background-color: #D3DCE6;
+                background-color: #545c64;
                 color: #333;
                 text-align: center;
             }
@@ -23,7 +23,7 @@
             .el-main {
                 background-color: #E9EEF3;
                 color: #333;
-                text-align: center;
+                padding: 10px;
             }
         }
     }
@@ -38,12 +38,20 @@
                 <el-button type="primary">退出登录</el-button>
             </el-header>
             <el-container>
-                <el-aside width="260px">
-                    <ul>
-                        <li v-for="(item, index) in menulist" :key="index">{{item.authName}}</li>
-                    </ul>
+                <el-aside width="240px">
+                    <el-menu router default-active="user" class="el-menu-vertical-demo" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+                        <el-submenu :index="item.path" v-for="(item, index) in menulist" :key="index">
+                            <template slot="title">
+                                <i class="el-icon-location"></i>
+                                <span>{{item.authName}}</span>
+                            </template>
+                            <el-menu-item :index="items.path" v-for="(items, index) in item.children" :key="index">{{items.authName}}</el-menu-item>
+                        </el-submenu>
+                    </el-menu>
                 </el-aside>
-                <el-main>Main</el-main>
+                <el-main>
+                    <router-view></router-view>
+                </el-main>
             </el-container>
         </el-container>
     </div>
@@ -60,7 +68,6 @@
         methods: {},
         created() {
             menulist().then(res => {
-                console.log(res.data.data)
                 this.menulist = res.data.data
             })
         }
