@@ -117,11 +117,11 @@
     </div>
 </template>
 <script>
-    import { getUsers, delUser, userStatus, addUser, editUser, searchUser, getRoles, setUserRoles } from '../../utils/api'
+    import { getUsers, delUser, userStatus, addUser, editUser, getRoles, setUserRoles } from '../../utils/api'
     export default {
         data() {
-            let mobleReg = (rule, value, callback) => {
-                let reg = /^1[3456789]\d{9}$/
+            const mobleReg = (rule, value, callback) => {
+                const reg = /^1[3456789]\d{9}$/
                 if (!reg.test(value)) {
                     return callback(new Error('请输入正确的手机号'));
                 } else {
@@ -161,7 +161,7 @@
                     ],
                     password: [
                         { required: true, message: '请输入密码', trigger: 'blur' },
-                        { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+                        { min: 5, max: 16, message: '长度在 5 到 16 个字符', trigger: 'blur' }
                     ],
                     email: [
                         { required: true, message: '请输入邮箱', trigger: 'blur' },
@@ -169,7 +169,7 @@
                     ],
                     mobile: [
                         { required: true, message: '请输入电话', trigger: 'blur' },
-                        { validator: mobleReg, message: "中国手机号", trigger: "blur" }
+                        { validator: mobleReg, message: '中国手机号', trigger: 'blur' }
                     ]
                 },
                 roles: '',
@@ -179,12 +179,10 @@
         methods: {
             getuser() { //获取用户列表和角色列表
                 getUsers(this.page).then(res => {
-                    console.log(res.data.data);
                     this.userlist = res.data.data.users
                     this.total = res.data.data.total
                 })
                 getRoles().then(res => {
-                    console.log(res.data.data)
                     this.roleslist = res.data.data
                 })
             },
@@ -202,7 +200,7 @@
                     mg_state: row.mg_state
                 }
                 userStatus(data).then(res => {
-                    console.log(res);
+                    console.log(res)
                 })
             },
             del(row) { //删除用户
@@ -296,7 +294,8 @@
                 }
                 console.log(data);
                 setUserRoles(data).then(res => {
-                    console.log(res);
+                    this.dialogFormVisible2 = false
+                    this.getuser()
                 })
             }
         },

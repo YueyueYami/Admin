@@ -21,4 +21,12 @@
         width: 100%;
         height: 100%;
     }
+
+    .el-cascader__dropdown {
+        height: 200px;
+    }
+
+    .el-cascader-panel {
+        height: 200px;
+    }
 </style>

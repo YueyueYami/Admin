@@ -4,7 +4,7 @@ import { Message } from 'element-ui'
 // import router from '@/router/index'
 const https = axios.create({
     baseURL: dev.prod.baseURL,
-    timeout: 5000
+    timeout: 50000
 })
 https.interceptors.request.use(
     (config) => {
@@ -27,7 +27,9 @@ https.interceptors.response.use(
         if (status.includes(response.data.meta.status)) {
             Message({
                 message: response.data.meta.msg,
-                type: 'success'
+                type: 'success',
+                duration: 500,
+                offset: 30
             })
         } else {
             Message({

@@ -19,6 +19,16 @@ module.exports = {
         'space-in-parens': 0,
         'comma-dangle': 'off',
         'eqeqeq': 'off',
-        'semi': 'off'
+        'semi': 'off',
+        'spaced-comment': 'off',
+        'prefer-const': 'off',
+        'quotes': 'off',
+        "vue/multi-word-component-names": [
+            "error",
+            {
+                ignores: ["index"], //需要忽略的组件名
+            },
+        ],
+
     }
 }

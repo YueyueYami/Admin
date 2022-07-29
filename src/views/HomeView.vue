@@ -35,11 +35,11 @@
             <el-header height="80px">
                 <h2>公司logo</h2>
                 <h1>企业后台管理系统</h1>
-                <el-button type="primary">退出登录</el-button>
+                <el-button type="primary" @click="outlogin">退出登录</el-button>
             </el-header>
             <el-container>
                 <el-aside width="240px">
-                    <el-menu router default-active="user" class="el-menu-vertical-demo" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+                    <el-menu router :default-active="menuactive" class="el-menu-vertical-demo" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
                         <el-submenu :index="item.path" v-for="(item, index) in menulist" :key="index">
                             <template slot="title">
                                 <i class="el-icon-location"></i>
@@ -62,10 +62,25 @@
         name: 'HomeView',
         data() {
             return {
-                menulist: []
+                menulist: [],
+                menuactive: ''
             }
         },
-        methods: {},
+        methods: {
+            outlogin() {
+                window.sessionStorage.removeItem('token')
+                this.$router.push('/home')
+            }
+        },
+        watch: {
+            $route: {
+                deep: true,
+                immediate: true,
+                handler(oval, nval) {
+                    this.menuactive = oval.matched[1].name
+                }
+            }
+        },
         created() {
             menulist().then(res => {
                 this.menulist = res.data.data

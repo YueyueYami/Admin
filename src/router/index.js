@@ -9,14 +9,46 @@ const routes = [{
         name: 'home',
         component: HomeView,
         redirect: '/welcome',
-        children: [{
+        children: [{ //用户页面
             path: '/users',
             name: 'users',
             component: () => import('../views/User/index.vue')
-        }, {
+        }, { //欢迎页面
             path: '/welcome',
             name: 'welcome',
-            component: () => import('../views/Welcome.vue')
+            component: () => import('../views/WelcomeView.vue')
+        }, { //角色列表
+            path: '/roles',
+            name: 'roles',
+            component: () => import('../views/Jurisdictions/RolesList.vue')
+        }, { //权限列表
+            path: '/rights',
+            name: 'rights',
+            component: () => import('../views/Jurisdictions/JurisdictionList.vue')
+        }, { //商品列表
+            path: '/goods',
+            name: 'goods',
+            component: () => import('../views/Goods/GoodsList.vue')
+        }, { //添加商品
+            path: '/addgoods',
+            name: 'addgoods',
+            component: () => import('../views/Goods/AddGoods.vue')
+        }, { //categories商品分类
+            path: '/categories',
+            name: 'categories',
+            component: () => import('../views/Goods/GoodsCate.vue')
+        }, { //商品动态参数页面
+            path: '/params',
+            name: 'params',
+            component: () => import('../views/Goods/ParamsView.vue')
+        }, { //订单管理页面
+            path: '/orders',
+            name: 'orders',
+            component: () => import('../views/Orders/OrdersList.vue')
+        }, { //数据报表
+            path: '/reports',
+            name: 'reports',
+            component: () => import('../views/Report/ReportsView.vue')
         }]
     },
     {
